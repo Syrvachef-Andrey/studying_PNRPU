@@ -63,6 +63,18 @@
 # led = DigitalInOut(board.LED)
 # lde.direction = Direction.OUTPUT
 
+# Управление GPIO
+
+# Платы, поддерживающие Python
+# - С операционной системой
+# - Без нее
+
+# Для работы с GPIO нужен adafruit Python
+# У GPIO контакта есть 3 состояния: вход, выход, ничего (дефолтное значение).
+
+# led = DigitalInOut(board.LED)
+# lde.direction = Direction.OUTPUT
+
 m = []
 s = ' '
 while s != '':
