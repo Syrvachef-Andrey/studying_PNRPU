@@ -51,3 +51,34 @@
 #
 # print(A_3_5.prod())
 
+# Управление GPIO
+
+# Платы, поддерживающие Python
+# - С операционной системой
+# - Без нее
+
+# Для работы с GPIO нужен adafruit Python
+# У GPIO контакта есть 3 состояния: вход, выход, ничего (дефолтное значение).
+
+# led = DigitalInOut(board.LED)
+# lde.direction = Direction.OUTPUT
+
+m = []
+s = ' '
+while s != '':
+    s = str(input())
+    m.append(s)
+m.remove('')
+n = max(m, key=len)
+m = m[::-1]
+for i in range(len(m)):
+    if len(m[i]) % 2 == 0:
+        m[i] = '-' * ((len(n) - len(m[i])) // 2) + str(m[i]) + '-' * ((len(n) - len(m[i])) // 2)
+        if len(m[i]) != len(n):
+            m[i] = str(m[i]) + '-'
+    else:
+        m[i] = '-' * ((len(n) - len(m[i])) // 2) + str(m[i]) + '-' * ((len(n) - len(m[i])) // 2)
+        if len(m[i]) != len(n):
+            m[i] = str(m[i]) + '-'
+for i in m:
+    print(i)
