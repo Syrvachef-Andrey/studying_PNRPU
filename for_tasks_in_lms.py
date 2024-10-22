@@ -85,19 +85,32 @@ def final_table(quant, input_list):
                             list_of_string.append(input_list[counter])
                             list_of_table.append(list_of_string)
                         counter += 1
-    print("\n")
     return list_of_table
 
 
 
-def sdnf(list_of_func):
-    print("СДНФ")
-    for str in list_of_func:
-        for ind in str:
-            if str[ind] == 0:
+def sdnf(list_of_func, quant):
+    print("СДНФ: ", end='')
+    str_sdnf = ''
+    if quant == 2:
+        for ind_str in range(len(list_of_func)):
+            for ind in range(len(list_of_func[ind_str]) - 1):
+                if ind == 0:
+                    if not(list_of_func[ind_str][ind]):
+                        str_sdnf += '!x'
+                    else:
+                        str_sdnf += 'x'
+                else:
+                    if not(list_of_func[ind_str][ind]):
+                        str_sdnf += '!y'
+                    else:
+                        str_sdnf += 'y'
+            if ind_str + 1 != len(list_of_func):
+                str_sdnf += ' V '
+    print(str_sdnf, "\n")
 
 
-def sknf(list_of_func):
+def sknf(list_of_func, quant):
     print("СКНФ")
 
 print("Введите кол-во переменных")
@@ -117,7 +130,7 @@ if 2 <= quantity_variable <= 4:
         print("Случйно сгенерированнеые значения")
         bulev_list = list_of_true(quantity_variable, s)
     list_of_func = final_table(quantity_variable, bulev_list)
-    sdnf(list_of_func)
-    sknf(list_of_func)
+    sdnf(list_of_func, quantity_variable)
+    sknf(list_of_func, quantity_variable)
 else:
     print("Недопустимое кол-во переменных")
