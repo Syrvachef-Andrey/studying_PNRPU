@@ -5,6 +5,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from bs4 import BeautifulSoup
 from datetime import datetime
 
+
 def parse():
     url = 'https://ru.investing.com/currencies/usd-rub-historical-data'
 
@@ -33,7 +34,6 @@ def parse():
                 open_price = cells[2].text.strip()
                 high_price = cells[3].text.strip()
                 low_price = cells[4].text.strip()
-                change_percentage = cells[5].text.strip()
                 if date[3:5] == '10':
                     list_of_date.append(datetime.strptime(date, '%d.%m.%Y'))
                     list_of_price.append(price)
