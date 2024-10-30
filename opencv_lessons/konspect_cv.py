@@ -63,3 +63,41 @@
 # cv2.imshow('test_flipped', image_flipped)
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()
+
+# import cv2
+# import numpy as np
+#
+# photo = np.zeros((500, 500, 3), dtype='uint8') # ((количество строк, количество столбцов,
+# # количество слоёв цвета), формат чисел)
+#
+# photo[0:100, 0:100] = 119, 201, 105
+# # заливка цветом по срезам пикселей
+# cv2.rectangle(photo, (10, 100), (100, 200), (153, 241, 241), 3)
+# # (изображение, левый верхний угол (точка), нижний правый угол (точка), цвет обводки, толщина обводки)
+# cv2.rectangle(photo, (10, 200), (100, 300), (153, 241, 241), cv2.FILLED)
+# # (изображение, левый верхний угол (точка), нижний правый угол (точка), цвет обводки, заливка)
+# cv2.line(photo, (10, 300), (30, 400), (105, 24, 155), 3)
+# # (изображение, начальная точка, конечная точка, цвет, толщина)
+# cv2.circle(photo, (50, 450), 50, (50, 50, 234), cv2.FILLED)
+# # (изображение, центр круга, радиус, цвет, толщина обводки или заливка)
+# cv2.putText(photo, 'Berserk', (300, 300), cv2.FONT_HERSHEY_TRIPLEX, 1, (0, 0, 255), 1)
+#
+# cv2.imshow('Photo', photo)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+# Обнаружение номеров машины с помощью каскадов данных opencv
+
+# import cv2
+#
+# number_cascade = cv2.CascadeClassifier('cascades/haarcascade_russian_plate_number.xml')
+# img = cv2.imread('images/number_2.jpg')
+# gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+#
+# numbers = number_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=30)
+# for x, y, w, h in numbers:
+#     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+#
+# cv2.imshow('Number detect', img)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
