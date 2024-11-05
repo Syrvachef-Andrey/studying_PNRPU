@@ -118,22 +118,101 @@
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()
 
-# Программа находящая лицо на картинке
+# Программа находящая лицо, губы и глаза на картинке
 
 # import cv2
-# face_cascade = cv2.CascadeClassifier('cascades/haarcascade_frontalface_default.xml')
 #
-# img = cv2.imread('images/face_img.jpg')
-# img = cv2.resize(img, (img.shape[1] // 7, img.shape[0] // 7))
+# cap = cv2.VideoCapture(0)
+# faces_cascade = cv2.CascadeClassifier('cascades/haarcascade_frontalface_default.xml')
+# eye_cascade = cv2.CascadeClassifier('cascades/haarcascade_eye.xml')
+# smile_cascade = cv2.CascadeClassifier('cascades/haarcascade_smile.xml')
+#
+# while True:
+#     win, img = cap.read()
+#     gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+#
+#     faces = faces_cascade.detectMultiScale(gray_img, scaleFactor=1.05, minNeighbors=15)
+#
+#     for x, y, w, h in faces:
+#         cv2.rectangle(img, (x, y), (x + w, y + h), (0, 0, 255), 3)
+#         roi_color = img[y:y + h, x:x + w]
+#         roi_gray = gray_img[y:y + h, x:x + w]
+#         eyes = eye_cascade.detectMultiScale(roi_gray, scaleFactor=1.2, minNeighbors=15)
+#         for ex, ey, ew, eh in eyes:
+#             cv2.rectangle(roi_color, (ex, ey), (ex + ew, ey + eh), (0, 255, 0), 3)
+#         smiles = smile_cascade.detectMultiScale(roi_gray, scaleFactor=1.1, minNeighbors=38)
+#         for sx, sy, sw, sh in smiles:
+#             cv2.rectangle(roi_color, (sx, sy), (sx + sw, sy + sh), (255, 0, 0), 3)
+#
+#     cv2.imshow('original', img)
+#
+#     if cv2.waitKey(1) & 0xFF == ord('q'):
+#         break
+#
+# cap.release()
+# cv2.destroyAllWindows()
+
+# Выделение контуров на изображении
+
+# import cv2
+# import numpy as np
+#
+# image = cv2.imread('images/OpenCV.jpg')
+#
+# gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# gray = cv2.GaussianBlur(gray, (5, 5), 0)
+#
+# contour_image = cv2.Canny(gray, 100, 140)
+#
+# con, hir = cv2.findContours(contour_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
+#
+# cv2.drawContours(contour_image, con, -1, (230, 111, 58), 5)
+#
+# cv2.imshow('contour_image', contour_image)
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+# Выделение прямоугольником контура
+#
+# import cv2
+#
+# img = cv2.imread("images/OpenCV.jpg")
 # gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 #
-# faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5)
+# ret, thresh1 = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU)
 #
-# for x, y, w, h in faces:
-#     cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
-#     roi_color = img[y:y + h, x:x + w]
-#     roi_gray = gray[y:y + h, x:x + w]
+# rect_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (12, 12))
 #
-# cv2.imshow('FACE DETECT', img)
+# dilation = cv2.dilate(thresh1, rect_kernel, iterations=3)
+#
+# contours, hierarchy = cv2.findContours(dilation, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+#
+# im2 = img.copy()
+#
+# crop_number = 0
+# for cnt in contours:
+#     x, y, w, h = cv2.boundingRect(cnt)
+#
+#     # Рисуем ограничительную рамку на текстовой области
+#     rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
+#
+# cv2.imshow("Result", im2)
+# cv2.waitKey(0)
+
+# Выделение цветных фигур контурами
+
+# import cv2
+#
+# image = cv2.imread('images/cockerel.jpg')
+# gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+# gray_image = cv2.GaussianBlur(gray_image, (5, 5), 0)
+#
+# contour_image = cv2.Canny(gray_image, 50, 100)
+#
+# con, hin = cv2.findContours(contour_image, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
+#
+# cv2.drawContours(image, con, -1, (255, 0, 0), 2)
+#
+# cv2.imshow('image', image)
 # cv2.waitKey(0)
 # cv2.destroyAllWindows()
