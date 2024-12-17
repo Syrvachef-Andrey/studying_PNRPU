@@ -1,3 +1,7 @@
+from random import randint as rn
+import numpy as np
+
+
 def find_connected_components(matrix):
     n = len(matrix)  # Количество вершин
     visited = [False] * n  # Отслеживаем посещенные вершины
@@ -24,11 +28,10 @@ def find_connected_components(matrix):
     return components
 
 
-from random import randint as rn
-import numpy as np
 def mat_print(matrix):
     for row in matrix:
         print(*row)
+
 
 r = int(input('Введите размерность матрицы - '))
 a = int(input('Построить матрицу:\n 0 - вручную\n 1 - автоматически \n'))
