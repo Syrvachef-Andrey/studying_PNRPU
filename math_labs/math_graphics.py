@@ -1,36 +1,42 @@
-import numpy as np
 import matplotlib.pyplot as plt
 
-# Функция для вычисления координат звеньев манипулятора
-def forward_kinematics(theta1, theta2, l1, l2):
-    x1 = l1 * np.cos(theta1)
-    y1 = l1 * np.sin(theta1)
-    x2 = x1 + l2 * np.cos(theta1 + theta2)
-    y2 = y1 + l2 * np.sin(theta1 + theta2)
-    return (x1, y1), (x2, y2)
+len_1 = 6
+len_2 = 6
+len_3 = 6
 
-# Параметры манипулятора
-l1 = 1.0  # Длина первого звена
-l2 = 1.0  # Длина второго звена
-theta1 = np.pi / 4  # Угол первого звена (в радианах)
-theta2 = np.pi / 6  # Угол второго звена (в радианах)
+a = [0, 0]
+b = [0, 2]
+c = [6, 2]
+d = [6, 0]
+e = [3, 2]
+f = [e[0], e[1] + len_1]
+g = [e[0], f[1] + len_2]
+i = [e[0] + len_3, g[1]]
 
-# Вычисляем координаты звеньев
-joint1, joint2 = forward_kinematics(theta1, theta2, l1, l2)
+plt.plot([a[0], b[0]], [a[1], b[1]])
+plt.plot([b[0], c[0]], [b[1], c[1]])
+plt.plot([c[0], d[0]], [c[1], d[1]])
+plt.plot([a[0], d[0]], [a[1], d[1]])
+plt.plot([e[0], f[0]], [e[1], f[1]])
+plt.plot([f[0], g[0]], [f[1], g[1]])
+plt.plot([g[0], i[0]], [g[1], i[1]])
 
-# Визуализация
-plt.figure()
-plt.plot([0, joint1[0]], [0, joint1[1]], 'b-', label='Звено 1')  # Первое звено
-plt.plot([joint1[0], joint2[0]], [joint1[1], joint2[1]], 'r-', label='Звено 2')  # Второе звено
-plt.plot(0, 0, 'ko', label='Основание')  # Основание
-plt.plot(joint1[0], joint1[1], 'go', label='Соединение 1')  # Соединение 1
-plt.plot(joint2[0], joint2[1], 'mo', label='Конец манипулятора')  # Конец манипулятора
+plt.scatter(e[0], e[1], color='red')
+plt.scatter(a[0], a[1], color='red')
+plt.scatter(b[0], b[1], color='red')
+plt.scatter(d[0], d[1], color='red')
+plt.scatter(c[0], c[1], color='red')
+plt.scatter(f[0], f[1], color='red')
+plt.scatter(g[0], g[1], color='red')
+plt.scatter(i[0], i[1], color='red')
 
-# Настройка графика
-plt.xlim(-2, 2)
-plt.ylim(-2, 2)
-plt.gca().set_aspect('equal', adjustable='box')
-plt.legend()
+plt.axis('equal')
+
+plt.xlabel('X')
+plt.ylabel('Y')
+plt.title("MATH GRAPHICS")
+
 plt.grid(True)
-plt.title("2D Манипулятор")
 plt.show()
+
+print("Начальное положение")
