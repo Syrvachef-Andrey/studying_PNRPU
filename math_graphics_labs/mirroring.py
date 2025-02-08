@@ -24,14 +24,14 @@ T1 = np.array([
 ])
 
 R0 = np.array([
-    [cos(-radians(63.33)), sin(-radians(63.33)), 0],
-    [-sin(-radians(63.33)), cos(-radians(63.33)), 0],
+    [cos(-radians(63.44)), sin(-radians(63.44)), 0],
+    [-sin(-radians(63.44)), cos(-radians(63.44)), 0],
     [0, 0, 1]
 ])
 
 R1 = np.array([
-    [cos(radians(63.33)), sin(radians(63.33)), 0],
-    [-sin(radians(63.33)), cos(radians(63.33)), 0],
+    [cos(radians(63.44)), sin(radians(63.44)), 0],
+    [-sin(radians(63.44)), cos(radians(63.44)), 0],
     [0, 0, 1]
 ])
 
