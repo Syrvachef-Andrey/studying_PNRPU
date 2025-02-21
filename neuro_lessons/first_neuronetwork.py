@@ -48,6 +48,11 @@ for epochs in range(epochs):
     e_loss = 0
     e_correct = 0
 
+np.save('weights_input_to_hidden.npy', weights_input_to_hidden)
+np.save('weights_hidden_to_output.npy', weights_hidden_to_output)
+np.save('bias_input_to_hidden.npy', bias_input_to_hidden)
+np.save('bias_hidden_to_output.npy', bias_hidden_to_output)
+
 test_image = random.choice(images)
 
 image = np.reshape(test_image, (-1, 1))
