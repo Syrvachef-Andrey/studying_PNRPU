@@ -48,8 +48,6 @@ for epochs in range(epochs):
     e_loss = 0
     e_correct = 0
 
-import random
-
 test_image = random.choice(images)
 
 image = np.reshape(test_image, (-1, 1))
