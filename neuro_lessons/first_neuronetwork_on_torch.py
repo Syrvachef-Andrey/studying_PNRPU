@@ -5,7 +5,6 @@ from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
 
 
-# Загрузка датасета MNIST
 def load_dataset():
     transform = transforms.Compose([transforms.ToTensor(), transforms.Normalize((0.5,), (0.5,))])
     train_data = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
@@ -25,6 +24,11 @@ bias_hidden_to_output = torch.zeros(10, requires_grad=True)
 epochs = 15
 learning_rate = 0.01
 
+optimizer = torch.optim.SGD(
+    [weights_input_to_hidden, weights_hidden_to_output, bias_input_to_hidden, bias_hidden_to_output],
+    lr=learning_rate
+)
+
 for epoch in range(epochs):
     print(f"Epoch №{epoch}")
     e_loss = 0
@@ -43,18 +47,20 @@ for epoch in range(epochs):
         e_loss += loss.item()
         e_correct += int(torch.argmax(output) == torch.argmax(label))
 
+        # with torch.no_grad():
+        #     weights_input_to_hidden -= learning_rate * weights_input_to_hidden.grad
+        #     weights_hidden_to_output -= learning_rate * weights_hidden_to_output.grad
+        #     bias_input_to_hidden -= learning_rate * bias_input_to_hidden.grad
+        #     bias_hidden_to_output -= learning_rate * bias_hidden_to_output.grad
+        #
+        #     weights_input_to_hidden.grad.zero_()
+        #     weights_hidden_to_output.grad.zero_()
+        #     bias_input_to_hidden.grad.zero_()
+        #     bias_hidden_to_output.grad.zero_()
+
+        optimizer.zero_grad()
         loss.backward()
-
-        with torch.no_grad():
-            weights_input_to_hidden -= learning_rate * weights_input_to_hidden.grad
-            weights_hidden_to_output -= learning_rate * weights_hidden_to_output.grad
-            bias_input_to_hidden -= learning_rate * bias_input_to_hidden.grad
-            bias_hidden_to_output -= learning_rate * bias_hidden_to_output.grad
-
-            weights_input_to_hidden.grad.zero_()
-            weights_hidden_to_output.grad.zero_()
-            bias_input_to_hidden.grad.zero_()
-            bias_hidden_to_output.grad.zero_()
+        optimizer.step()
 
     print(f"Loss: {round((e_loss / images.shape[0]) * 100, 3)}%")
     print(f"Accuracy: {round((e_correct / images.shape[0]) * 100, 3)}%")
