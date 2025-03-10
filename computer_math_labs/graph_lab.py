@@ -3,13 +3,11 @@ import numpy as np
 
 
 def find_connected_components(matrix):
-    n = len(matrix)  # Количество вершин
-    visited = [False] * n  # Отслеживаем посещенные вершины
-    components = []  # Список компонент связности
-
+    n = len(matrix)
+    visited = [False] * n
+    components = []
     for i in range(n):
         if not visited[i]:
-            # Находим все вершины, связанные с текущей вершиной i
             component = []
             queue = [i]
             visited[i] = True
@@ -17,7 +15,6 @@ def find_connected_components(matrix):
             while queue:
                 vertex = queue.pop(0)
                 component.append(vertex)
-                # Ищем все смежные вершины
                 for j in range(n):
                     if matrix[vertex][j] == 1 and not visited[j]:
                         queue.append(j)
@@ -37,7 +34,7 @@ r = int(input('Введите размерность матрицы - '))
 a = int(input('Построить матрицу:\n 0 - вручную\n 1 - автоматически \n'))
 
 if a:
-    matrix = [[rn(0, 1) for i in range(r)] for i in range(r)]
+    matrix = [[rn(0, 1) for i in range(r)] for j in range(r)]
 else:
     matrix = []
     for i in range(r):
@@ -65,12 +62,10 @@ matrix[matrix > 0] = 1
 
 mat_print(matrix)
 print('Транспонированная матрица:')
-# транспонирование
 transp =np.transpose(matrix)
 mat_print(transp)
 
 print('Умножение транспонированной матрицы на полученную:')
-# умножение транспонированной на полученную
 result = transp * matrix
 mat_print(result)
 
