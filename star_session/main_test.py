@@ -80,14 +80,16 @@ class Application(tk.Tk):
         self.system = EquipmentSystem()
         self.system.generate_random_requests()
         self.current_user = None
-
+        self.logo_image = tk.PhotoImage(file="/home/andrey/PycharmProjects/studying_PNRPU/star_session/photos_for_project/logo.png")
+        self.library_image = tk.PhotoImage(file="/home/andrey/PycharmProjects/studying_PNRPU/star_session/photos_for_project/library.png")
+        self.library_image = self.library_image.subsample(2)
         self.create_welcome_screen()
 
     def create_welcome_screen(self):
         self.clear_window()
 
         tk.Label(self, text="Введите имя пользователя:", font=("Arial", 14)).pack(pady=10)
-
+        tk.Label(self, image=self.logo_image).pack(pady=10)
         self.name_entry = tk.Entry(self, font=("Arial", 12))
         self.name_entry.pack(pady=5)
 
@@ -122,7 +124,7 @@ class Application(tk.Tk):
         text_widget.insert(tk.END, info_text)
         text_widget.config(state=tk.DISABLED)
         text_widget.pack(pady=10, padx=10, fill=tk.BOTH, expand=True)
-
+        tk.Label(self, image=self.library_image).pack(pady=10)
         tk.Button(self, text="Я ознакомился с информацией", command=self.show_request_form,
                   font=("Arial", 12)).pack(pady=20)
 
