@@ -4,7 +4,6 @@ import random
 
 
 def generate_data(n=30):
-    """Генерация трёх массивов"""
     # Первый массив: итерации от 1 до n
     array1 = np.arange(1, n + 1)
 

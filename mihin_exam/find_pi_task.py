@@ -3,9 +3,6 @@ import math
 
 
 def estimate_pi(num_points):
-    """
-    Оценка числа pi методом Монте-Карло
-    """
     points_inside_circle = 0
 
     for _ in range(num_points):
@@ -35,10 +32,3 @@ print(f"Оценка π: {pi_estimate}")
 print(f"Точное π: {math.pi}")
 print(f"Разница: {abs(pi_estimate - math.pi)}")
 print(f"Округление до 1 знака: {round(pi_estimate, 1)}")
-
-# Проверим с меньшим количеством точек для демонстрации точности до 1 знака
-print("\n--- Проверка минимального количества для точности 0.1 ---")
-
-for n in [100, 500, 1000, 2000]:
-    pi_est = estimate_pi(n)
-    print(f"N={n:4d}: π≈{pi_est:.5f}, округление={round(pi_est, 1)}")

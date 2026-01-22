@@ -3,9 +3,6 @@ import matplotlib.pyplot as plt
 
 
 def parabolic_regression_analysis():
-    """
-    Анализ параболической регрессии по 10 точкам данных - СТРОГАЯ СТРУКТУРА
-    """
     print("=" * 80)
     print("АНАЛИЗ ПАРАБОЛИЧЕСКОЙ РЕГРЕССИИ - ПО МЕТОДИКЕ ИЗ ЛЕКЦИИ")
     print("=" * 80)
