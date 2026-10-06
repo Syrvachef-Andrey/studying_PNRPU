@@ -67,7 +67,6 @@ for iteration in range(max_iter):
 best_point = simplex[0]
 best_f = find_y(best_point)
 
-print("\n--- РЕЗУЛЬТАТЫ ---")
 print(f"b1 = {best_point[0]:.4f}")
 print(f"b2 = {best_point[1]:.4f}")
 print(f"b3 = {best_point[2]:.4f}")
