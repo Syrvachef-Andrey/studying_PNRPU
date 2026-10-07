@@ -41,11 +41,11 @@ while f > f_zad_2:
         b2 = b2 - delta
 
     f = find_y(b1, b2)
-    print("b1 =", f"{b1:.4f}", " b2 =", f"{b2:.4f}", " f =", f"{f:.4f}", " delta =", delta)
+    print("b1 =", f"{b1:.8f}", " b2 =", f"{b2:.8f}", " f =", f"{f:.8f}", " delta =", delta)
 
     if f_prev == f:
         delta = delta / 2
-        if delta < 0.001:
+        if delta < 0.00001:
             break
 
     time.sleep(0.01)
